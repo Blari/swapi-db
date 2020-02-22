@@ -18,6 +18,7 @@ export default class RandomPlanet extends Component {
   constructor() {
     super();
     this.updatePlanet();
+    setInterval(this.updatePlanet, 2500);
   }
 
   onPlanetLoadet = planet => {
@@ -31,12 +32,12 @@ export default class RandomPlanet extends Component {
     });
   };
 
-  updatePlanet() {
-    const id = 1111;
+  updatePlanet = () => {
+    const id = Math.floor(Math.random() * 20) + 3;
     this.SwapiService.getPlanet(id)
       .then(this.onPlanetLoadet)
       .catch(this.onError);
-  }
+  };
 
   render() {
     const { planet, loading, error } = this.state;
@@ -70,15 +71,15 @@ const PlanetView = ({ planet }) => {
         <h4>{name}</h4>
         <ul className="list-group list-group-flush">
           <li className="list-group-item">
-            <span className="term">Population</span>
+            <span className="term">Population:</span>
             <span>{population}</span>
           </li>
           <li className="list-group-item">
-            <span className="term">Rotation Period</span>
+            <span className="term">Rotation Period:</span>
             <span>{rotationPeriod}</span>
           </li>
           <li className="list-group-item">
-            <span className="term">Diameter</span>
+            <span className="term">Diameter:</span>
             <span>{diameter}</span>
           </li>
         </ul>
