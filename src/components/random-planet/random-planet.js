@@ -4,7 +4,6 @@ import ErrorIndicator from "../../components/error-indicator";
 
 import "./random-planet.css";
 import Spiner from "../spinner";
-import Spinner from "../spinner";
 
 export default class RandomPlanet extends Component {
   SwapiService = new SwapiService();
@@ -14,12 +13,6 @@ export default class RandomPlanet extends Component {
     loading: true,
     error: false
   };
-
-  constructor() {
-    super();
-    this.updatePlanet();
-    setInterval(this.updatePlanet, 2500);
-  }
 
   onPlanetLoadet = planet => {
     this.setState({ planet, loading: false });
@@ -31,6 +24,15 @@ export default class RandomPlanet extends Component {
       loading: false
     });
   };
+
+  componentDidMount() {
+    this.updatePlanet();
+    this.interval = setInterval(this.updatePlanet, 5000);
+  };
+
+  componentWillUnmount() {
+    clearInterval(this.interval)
+  }
 
   updatePlanet = () => {
     const id = Math.floor(Math.random() * 20) + 3;
