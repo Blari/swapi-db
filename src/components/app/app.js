@@ -82,7 +82,6 @@ export default class App extends Component {
             <PersonDetails personId={this.state.selectedPerson} />
           </div>
         </div>
-
       </div>
     );
   }
